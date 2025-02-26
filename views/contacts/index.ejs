@@ -1,0 +1,48 @@
+<%- include('../partials/layout.ejs') %>
+
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+            <div>
+
+                <h3>Danh sách </h3>
+            </div>
+            <div>
+                <a href="/contacts/add" class="btn btn-warning btn-sm"> <i class="fa-solid fa-plus"></i> Thêm mới</a>
+            </div>
+        </div>
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Loại</th>
+                        <th>Tên</th>
+                        <th>Vị trí</th>
+                        <th>Ghi chú</th>
+                        <th>Ngày tạo</th>
+                        <th>Hành động</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <% contacts.forEach(contact => { %>
+                        <tr>
+                            <td><%= contact.ID %></td>
+                            <td><%= contact.TYPE_ID %></td>
+                            <td><%= contact.NAME %></td>
+                            <td><%= contact.POST %></td>
+                            <td><%= contact.COMMENTS %></td>
+                            <td><%= contact.DATE_CREATE %></td>
+                            <td class="d-grid gap-2">
+                                <a href="/contacts/<%= contact.ID %>/edit" class="btn btn-primary btn-sm"> <i class="fa-regular fa-pen-to-square"></i> Sửa</a>
+                                <a href="/contacts/<%= contact.ID %>/delete" class="btn btn-danger btn-sm" 
+                                   onclick="return confirm('Bạn có chắc chắn muốn xóa liên lạc này?');"> <i class="fa-solid fa-trash"></i> Xóa</a>
+                              </td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,194 @@
+<%- include('../partials/layout.ejs') %>
+
+<div class="container mt-4">
+  <h1>Sửa liên lạc</h1>
+  <form action="/contacts/<%= dataContact?.ID %>/edit?idBank=<%= dataBank?.ID %>&idRequisite=<%= dataRequisite?.ID %>" method="POST" id="form_contact">
+    <!-- DATA -->
+    <div class="form-group mb-3">
+      <label for="dataContact[NAME]">Nhập họ và tên <span class="text-danger">(*)</span></label>
+      <input
+        type="text"
+        class="form-control"
+        id="dataContact[NAME]"
+        name="dataContact[NAME]"
+        placeholder="Nhập tên..."
+        required
+        value="<%= dataContact.NAME %>"
+      />
+    </div>
+
+    <% if (dataContact.PHONE?.length >= 1) { %>
+        <% dataContact.PHONE.map((result)=>{ %>
+            <div class="form-group mb-3">
+                <label for="dataContact[PHONE]">Nhập số điện thoại </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="dataContact[PHONE]"
+                  name="dataContact[PHONE]"
+                  placeholder="Nhập số điện thoại..."
+                  value="<%= result.VALUE %>"
+                />
+              </div>
+        <% }) %>
+      <% } else { %>
+        <div class="form-group mb-3">
+            <label for="dataContact[PHONE]">Nhập số điện thoại </label>
+            <input
+              type="text"
+              class="form-control"
+              id="dataContact[PHONE]"
+              name="dataContact[PHONE]"
+              placeholder="Nhập số điện thoại..."
+            />
+          </div>
+    <% } %>
+
+    <% if (dataContact.EMAIL?.length >= 1) { %>
+        <% dataContact.EMAIL.map((result)=>{ %>
+            <div class="form-group mb-3">
+                <label for="dataContact[EMAIL]">Nhập địa chỉ email</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="dataContact[EMAIL]"
+                  name="dataContact[EMAIL]"
+                  placeholder="Nhập tên..."
+                  value="<%= result.VALUE %>"
+                />
+              </div>
+        <% }) %>
+      <% } else { %>
+        <div class="form-group mb-3">
+            <label for="dataContact[EMAIL]">Nhập địa chỉ email</label>
+            <input
+              type="email"
+              class="form-control"
+              id="dataContact[EMAIL]"
+              name="dataContact[EMAIL]"
+              placeholder="Nhập tên..."
+            />
+          </div>
+    <% } %>
+    
+
+    <% if (dataContact.WEB?.length >= 1) { %>
+        <% dataContact.WEB.map((result)=>{ %>
+            <div class="form-group mb-3">
+                <label for="dataContact[WEB]">Nhập địa chỉ web </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="dataContact[WEB]"
+                  name="dataContact[WEB]"
+                  placeholder="Nhập địa chỉ website..."
+                  value="<%= result.VALUE %>"
+                />
+              </div>
+        <% }) %>
+      <% } else { %>
+        <div class="form-group mb-3">
+            <label for="dataContact[WEB]">Nhập địa chỉ web </label>
+            <input
+              type="text"
+              class="form-control"
+              id="dataContact[WEB]"
+              name="dataContact[WEB]"
+              placeholder="Nhập địa chỉ website..."
+            />
+          </div>
+    <% } %>
+
+    
+    <!-- ADDRESS -->
+    <div class="row">
+      <div class="form-group col mb-3">
+        <label for="dataContact[ADDRESS]">Phường/xã</label>
+        <input
+          type="text"
+          class="form-control"
+          id="dataContact[ADDRESS]"
+          name="dataContact[ADDRESS]"
+          placeholder="Nhập phường xã..."
+          value="<%= dataContact.ADDRESS || null %>"
+        />
+      </div>
+      <div class="form-group col mb-3">
+        <label for="dataContact[ADDRESS_REGION]">Quận/huyện</label>
+        <input
+          type="text"
+          class="form-control"
+          id="dataContact[ADDRESS_REGION]"
+          name="dataContact[ADDRESS_REGION]"
+          placeholder="Nhập quận/huyện..."
+          value="<%= dataContact.ADDRESS_REGION || null %>"
+        />
+      </div>
+
+      <div class="form-group col mb-3">
+        <label for="dataContact[ADDRESS_CITY]">Tỉnh/thành phố</label>
+        <input
+          type="text"
+          class="form-control"
+          id="dataContact[ADDRESS_CITY]"
+          name="dataContact[ADDRESS_CITY]"
+          placeholder="Nhập tỉnh/thành phố..."
+          value="<%= dataContact.ADDRESS_CITY || null %>"
+        />
+      </div>
+    </div>
+
+    <div class="form-group mb-3">
+      <label for="dataContact[ADDRESS_COUNTRY]">Quốc gia</label>
+      <input
+        type="text"
+        class="form-control"
+        id="dataContact[ADDRESS_COUNTRY]"
+        name="dataContact[ADDRESS_COUNTRY]"
+        placeholder="Nhập quốc gia..."
+        value="<%= dataContact.ADDRESS_COUNTRY || null %>"
+      />
+    </div>
+
+    <!-- Bank -->
+
+    <div class="form-group mb-3">
+      <label for="dataBank[RQ_BANK_NAME]">Tên ngân hàng</label>
+      <input
+        type="text"
+        class="form-control"
+        id="dataBank[RQ_BANK_NAME]"
+        name="dataBank[RQ_BANK_NAME]"
+        placeholder="Nhập tên ngân hàng..."
+        value="<%= dataBank.RQ_BANK_NAME || null %>"
+      />
+    </div>
+    <div class="form-group mb-3">
+      <label for="dataBank[RQ_BANK_ADDR]">Địa chỉ</label>
+      <input
+        type="text"
+        class="form-control"
+        id="dataBank[RQ_BANK_ADDR]"
+        name="dataBank[RQ_BANK_ADDR]"
+        placeholder="Nhập địa chỉ ngân hàng..."
+        value="<%= dataBank.RQ_BANK_ADDR || null %>"
+      />
+    </div>
+    <div class="form-group mb-3">
+      <label for="dataBank[RQ_ACC_NUM]">Số tài khoản</label>
+      <input
+        type="text"
+        class="form-control"
+        id="dataBank[RQ_ACC_NUM]"
+        name="dataBank[RQ_ACC_NUM]"
+        placeholder="Nhập số tài khoản..."
+        value="<%= dataBank.RQ_ACC_NUM || null %>"
+      />
+    </div>
+
+    <div class="mt-3">
+      <button type="submit" class="btn btn-primary">Hoàn tất</button>
+      <a href="/contacts" class="btn btn-secondary">Cancel</a>
+    </div>
+  </form>
+</div>
