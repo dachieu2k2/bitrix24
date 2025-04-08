@@ -86,7 +86,11 @@ export const request = async (options: AxiosRequestConfig, additional?: { token?
  * @return return data after call api Bitrix
  */
 export const callApiBitrix = async (action: any, payload: any) => {
-  const { access_token } = await readFileTokenJson()
-  const response = await request({ url: `${action}`, method: 'POST', data: payload }, { token: access_token })
-  return response
+  try {
+    const { access_token } = await readFileTokenJson()
+    const response = await request({ url: `${action}`, method: 'POST', data: payload }, { token: access_token })
+    return response
+  } catch (error) {
+    console.log(error)
+  }
 }
